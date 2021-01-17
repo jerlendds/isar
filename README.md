@@ -9,7 +9,7 @@ While setting up a headless CMS system I generated some files in the wrong direc
 
 ## Features
  - Query for strings in files
- - File type detection from content
+ - File type detection
  - Sort results by date
  - Sort results by file format
  - Rebuild lost folder structure from found metadata
@@ -25,5 +25,5 @@ While setting up a headless CMS system I generated some files in the wrong direc
 
 ## License
 
-We use GNU GPLv3. Here's what [choosealicense.com](https://choosealicense.com/licenses/gpl-3.0/) says about this license.
+GNU GPLv3 is used. Here's what [choosealicense.com](https://choosealicense.com/licenses/gpl-3.0/) says about this license.
  > Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and modifications, which include larger works using a licensed work, under the same license. Copyright and license notices must be preserved. Contributors provide an express grant of patent rights. 
