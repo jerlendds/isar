@@ -58,7 +58,7 @@ def recover_metadata(directories):
             print(current_file)
             with open(current_file, "rb") as f:
                 first_line = f.readline()
-                if first_line[:4] == "file:///":
+                if first_line[:4] == "file":
                     print(f"Metadata for {count} files found:", first_line[:40])
 
 
