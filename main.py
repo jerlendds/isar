@@ -1,7 +1,9 @@
+"""This file is under construction!"""
+import os
+import re
+
 testing_paths = ["/media/jerlends/fb21cc72-c5c3-4486-855b-fd52e9e0a272"]
 
-
-import os
 
 def scan_for_directories(directories):
     """Yield all recup_dir directories in passed list in format {"dirint": int, "path": str}
@@ -53,15 +55,34 @@ def recover_metadata(directories):
     """Recover metadata from iterable"""
     count = 0
     for directory in directories:
-        count += 1
         for current_file in scan_for_files(directory["path"]):
-            print(current_file)
             with open(current_file, "rb") as f:
                 first_line = f.readline()
-                if first_line[:4] == "file":
-                    print(f"Metadata for {count} files found:", first_line[:40])
+                try:
+                    if bool(re.search(r"^[file:\/\/\/]", first_line)):
+                        count += 1
+                        print(
+                            f"Metadata for {count} files found: {first_line}. ================== {current_file}"
+                        )
+                except TypeError:
+                    if bool(re.search(rb"^[file:\/\/\/]", first_line)):
+                        count += 1
+                        print(
+                            f"Metadata for {count} files found: {first_line}. ================== {current_file}"
+                        )
 
+    print("Metadata count:", count)
+
+
+recover_metadata(sort_directories(testing_paths, True))
+
+
+def clean_metadata():
+    """Remove binary data from recovered metadata"""
+    pass
 
 
 if __name__ == "__main__":
-    print("Sorry, this software isn't ready for release yet. If you're interested in contributing please fork and make a PR. Thanks, Jordan")
+    print(
+        "Sorry, this software isn't ready for release yet. If you're interested in contributing please fork and make a PR. Thanks, Jordan"
+    )
