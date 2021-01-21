@@ -1,5 +1,5 @@
 # ISAR - Illuminate Search & Retrieve
-After [PhotoRec](https://github.com/cgsecurity/testdisk) file recovery tool for linux. ISAR let's you query a folder with `recup_dir` directory files by strings of your choice and can attempt to detect lost filetypes. Results can be organized by any found metadata and filetypes. 
+After [PhotoRec](https://github.com/cgsecurity/testdisk) file recovery tool for linux. ISAR let's you query a folder with `recup_dir` directories by strings of your choice and can attempt to detect lost filetypes and recover metadata. Results can be organized by any found metadata, filetypes, mtime, ctime, and maybe more. We'll see. 
  > “Things are never lost to you; you are lost to them. If ever in need of a Thing that has lost you, simply stop hiding from it.” 
 
 
