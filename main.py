@@ -1,9 +1,21 @@
 """This file is under construction!"""
+
+
+
 import os
 import re
+import time
 
-testing_paths = ["/media/jerlends/fb21cc72-c5c3-4486-855b-fd52e9e0a272"]
+testing_paths = [
+    "/media/jerlends/Samsung_T5/Data Recovery/",
+    "/media/jerlends/fb21cc72-c5c3-4486-855b-fd52e9e0a272",
+]
 
+if __name__ == "__main__":
+    print(
+        f"Sorry, this software isn't ready for release yet. If you're interested in contributing please fork and make a PR. Thanks \n\n To recover metadata use the recover_metadata function and pass in the sort directories function with testing_paths. \n\n\n ATTEMPTING META DATA RECOVERY FROM {testing_paths}"
+    )
+    time.sleep(8)
 
 def scan_for_directories(directories):
     """Yield all recup_dir directories in passed list in format {"dirint": int, "path": str}
@@ -51,38 +63,39 @@ def scan_for_files(directory):
         yield os.path.join(directory, path)
 
 
-def recover_metadata(directories):
-    """Recover metadata from iterable"""
-    count = 0
+def get_files(directories):
+    """Recover metadata from files"""
     for directory in directories:
-        for current_file in scan_for_files(directory["path"]):
-            with open(current_file, "rb") as f:
-                first_line = f.readline()
-                try:
-                    if bool(re.search(r"^[file:\/\/\/]", first_line)):
-                        count += 1
-                        print(
-                            f"Metadata for {count} files found: {first_line}. ================== {current_file}"
-                        )
-                except TypeError:
-                    if bool(re.search(rb"^[file:\/\/\/]", first_line)):
-                        count += 1
-                        print(
-                            f"Metadata for {count} files found: {first_line}. ================== {current_file}"
-                        )
+        yield from scan_for_files(directory["path"])
 
-    print("Metadata count:", count)
+
+files_list = ["file:///", "b'file:///", "b'file:///'"]
+
+
+def recover_metadata(directories):
+    metadata_files_count = 0
+    for each_file in get_files(directories):
+        with open(each_file, "rb") as f:
+            first_line = f.readline()
+            detect_meta = str(first_line[:8])
+            if detect_meta in files_list:
+                metadata_files_count += 1
+                print(
+                    metadata_files_count,
+                    "\n",
+                    first_line,
+                    "\n\n",
+                    each_file,
+                    "\n\n\n\n",
+                )
 
 
 recover_metadata(sort_directories(testing_paths, True))
 
 
-def clean_metadata():
-    """Remove binary data from recovered metadata"""
+def sort_metadata():
+    """Remove known system files and organize by mtime or ctime"""
     pass
 
 
-if __name__ == "__main__":
-    print(
-        "Sorry, this software isn't ready for release yet. If you're interested in contributing please fork and make a PR. Thanks, Jordan"
-    )
+
