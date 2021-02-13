@@ -9,8 +9,7 @@ source_paths = [
 
 
 def scan_for_directories(directories):
-    """Yield all recup_dir directories in passed list
-        in format {"dirint": int, "path": str}
+    """Yield all recup_dir directories
 
     Args:
         directories (list): list of path(s) to recup_dir folders
